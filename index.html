@@ -1,70 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>ChatApp Farid</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-    }
-    #chat-box {
-      flex: 1;
-      padding: 10px;
-      overflow-y: auto;
-      background: #f0f0f0;
-    }
-    #input-box {
-      display: flex;
-      padding: 10px;
-      background: #fff;
-    }
-    #input-box input {
-      flex: 1;
-      padding: 10px;
-    }
-    #input-box button {
-      padding: 10px;
-    }
-    #ad-banner {
-      height: 60px;
-      background: #ddd;
-      text-align: center;
-      line-height: 60px;
-    }
-  </style>
 </head>
 <body>
-  <div id="chat-box"></div>
+  <h2>Selamat datang di ChatApp Farid</h2>
 
-  <div id="input-box">
-    <input type="text" id="message" placeholder="Ketik pesan...">
-    <button onclick="sendMessage()">Kirim</button>
-  </div>
+  <button onclick="loginWithGoogle()">Login dengan Google</button>
 
-  <div id="ad-banner">
-    <!-- Ganti script ini dengan script iklan Adcash milikmu -->
-    <script type="text/javascript">
-      document.write("Iklan Banner Adcash di sini");
-    </script>
-  </div>
+  <div id="user-info" style="margin-top: 20px;"></div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
 
   <script>
-    function sendMessage() {
-      const input = document.getElementById('message');
-      const chatBox = document.getElementById('chat-box');
-      const message = input.value.trim();
-      if (message) {
-        const div = document.createElement('div');
-        div.textContent = "Kamu: " + message;
-        chatBox.appendChild(div);
-        input.value = '';
-        chatBox.scrollTop = chatBox.scrollHeight;
-      }
+    const firebaseConfig = {
+      apiKey: "AIzaSyDfD5H8xXZhboOp78IdFPbxlhuE_LkGkDI",
+      authDomain: "chatapp-75cfd.firebaseapp.com",
+      projectId: "chatapp-75cfd",
+      storageBucket: "chatapp-75cfd.firebasestorage.app",
+      messagingSenderId: "197066503871",
+      appId: "1:197066503871:web:45fb035f0a1699751fb80a",
+      measurementId: "G-5HVWY1MYJP"
+    };
+
+    // Inisialisasi Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    function loginWithGoogle() {
+      auth.signInWithPopup(provider)
+        .then((result) => {
+          const user = result.user;
+          document.getElementById("user-info").innerHTML = `
+            <p>Halo, ${user.displayName}</p>
+            <img src="${user.photoURL}" width="100">
+            <p>Email: ${user.email}</p>
+          `;
+        })
+        .catch((error) => {
+          alert("Gagal login: " + error.message);
+        });
     }
   </script>
 </body>
