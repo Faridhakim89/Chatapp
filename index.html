@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ChatApp Farid</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    #chat-box {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      background: #f0f0f0;
+    }
+    #input-box {
+      display: flex;
+      padding: 10px;
+      background: #fff;
+    }
+    #input-box input {
+      flex: 1;
+      padding: 10px;
+    }
+    #input-box button {
+      padding: 10px;
+    }
+    #ad-banner {
+      height: 60px;
+      background: #ddd;
+      text-align: center;
+      line-height: 60px;
+    }
+  </style>
+</head>
+<body>
+  <div id="chat-box"></div>
+
+  <div id="input-box">
+    <input type="text" id="message" placeholder="Ketik pesan...">
+    <button onclick="sendMessage()">Kirim</button>
+  </div>
+
+  <div id="ad-banner">
+    <!-- Ganti script ini dengan script iklan Adcash milikmu -->
+    <script type="text/javascript">
+      document.write("Iklan Banner Adcash di sini");
+    </script>
+  </div>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById('message');
+      const chatBox = document.getElementById('chat-box');
+      const message = input.value.trim();
+      if (message) {
+        const div = document.createElement('div');
+        div.textContent = "Kamu: " + message;
+        chatBox.appendChild(div);
+        input.value = '';
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }
+    }
+  </script>
+</body>
+</html>
