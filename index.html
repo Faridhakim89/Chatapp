@@ -1,27 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ChatApp Farid - Anime Theme</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .chat-box { max-width: 400px; margin: auto; }
+        .message { padding: 5px; margin: 5px; border-radius: 5px; }
+        .my-message { background-color: #dcf8c6; text-align: right; }
+        .other-message { background-color: #f1f1f1; }
+    </style>
 </head>
 <body>
-  <div class="chat-container">
-    <h1>Selamat datang di ChatApp </h1>
-    <button class="login-btn" onclick="loginWithGoogle()">Login dengan Google</button>
-    <div id="user-info" class="hidden"></div>
-    <div id="chat-box" class="hidden">
-      <div id="messages" class="messages"></div>
-      <input type="text" id="messageInput" placeholder="Tulis pesan..." />
-      <button onclick="sendMessage()">Kirim</button>
+    <div id="user-info">
+        <button onclick="loginWithGoogle()">Login with Google</button>
     </div>
-  </div>
-
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
-  <script src="script.js"></script>
+    <div id="chat-box" class="hidden">
+        <div id="messages"></div>
+        <input type="text" id="messageInput" placeholder="Tulis pesan...">
+        <button onclick="sendMessage()">Kirim</button>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
