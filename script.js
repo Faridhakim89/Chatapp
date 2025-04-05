@@ -66,3 +66,31 @@ auth.onAuthStateChanged((user) => {
     fetchMessages();
   }
 });
+function uploadFile() {
+  const file = document.getElementById("uploadInput").files[0];
+  if (!file) {
+    alert("Sila pilih file dahulu.");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", "chatapp_unsigned"); // Ganti jika preset kamu namanya lain
+
+  fetch("https://api.cloudinary.com/v1_1/dgojbzawi/upload", {
+    method: "POST",
+    body: formData
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log("Upload berjaya:", data);
+    document.getElementById("preview").innerHTML = `
+      <p>Upload berjaya!</p>
+      <a href="${data.secure_url}" target="_blank">Lihat File</a>
+    `;
+  })
+  .catch(err => {
+    console.error("Upload gagal:", err);
+    alert("Gagal upload: " + err.message);
+  });
+}
